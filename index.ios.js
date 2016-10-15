@@ -9,7 +9,7 @@ import Second from '/Users/mahendramhatre/Desktop/Wayfarer/Second.js';
 
 export default class Wayfarer extends Component {
 
-/* Gets called when some element is pushed into the stack and depending on the route name the page is opened. Extra attributes can be 
+/* Gets called when some element is pushed into the stack and depending on the route name the page is opened. Extra attributes can be
   passed to it
  */
   renderScene(route,navigator) {
@@ -17,7 +17,10 @@ export default class Wayfarer extends Component {
       return (<First navigator={navigator} />);
     }
     if(route.name == 'Second') {
-      return (<Second navigator={navigator} />);
+      return (<Second navigator={navigator}   getBack={() => {
+         navigator.pop();
+
+            }} />);
     }
 
   }
@@ -30,12 +33,14 @@ export default class Wayfarer extends Component {
   }
 
 
+
   render() {
     return (
       <Navigator
         configureScene={ this.configureScene }
         initialRoute= {{name : 'root'}}
         renderScene={this.renderScene.bind(this)}
+
         />
     );
   }

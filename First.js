@@ -13,6 +13,7 @@ import {
 export default class First extends Component {
 
 
+
   navigate(routeName) {
       this.props.navigator.push({
         name: routeName
@@ -41,6 +42,8 @@ export default class First extends Component {
            <TouchableHighlight  onPress={this.navigate.bind(this ,'Second')} style = {styles.button}>
               <Text style = {styles.buttonText}> Button 1</Text>
            </TouchableHighlight>
+
+           
 
            </View>
     );
