@@ -7,12 +7,11 @@ import {
   Switch,
   TextInput,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Image
 } from 'react-native';
 
 export default class First extends Component {
-
-
 
   navigate(routeName) {
       this.props.navigator.push({
@@ -20,60 +19,61 @@ export default class First extends Component {
       })
   }
 
-  state = {
-            trueSwitchIsOn: true,
-            falseSwitchIsOn: false
-          }
   render() {
-    return (
-      <View style={styles.container}>
+      return  (
 
-            <Switch
-              onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
-              style={{width:80,marginBottom:30}}
-              value={this.state.falseSwitchIsOn} />
+        <Image source={require('/Users/mahendramhatre/Desktop/Wayfarer/Wayfarer.png')} style= {styles.backgroundImage}>
+            <View style ={styles.container}>
 
-           <Text  style = {styles.button}> Student Mode </Text>
+                  <Text  style = {{paddingLeft:20,paddingTop:200,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> So where are we going ?</Text>
 
-           <TextInput style={styles.searchBar} placeholder= "Search"/>
+                  <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
 
-           <TextInput style={styles.searchBar} placeholder= "Search"/>
+                  <Text  style = {{paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> And you are?</Text>
+                  <Text  style = {{paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Or who you d want to be?</Text>
 
-           <TouchableHighlight  onPress={this.navigate.bind(this ,'Second')} style = {styles.button}>
-              <Text style = {styles.buttonText}> Button 1</Text>
-           </TouchableHighlight>
 
-           
+                  <TextInput style={styles.searchBar} placeholder= "   @Twitter Handle"/>
 
-           </View>
-    );
+                  <TouchableHighlight  style = {{borderRadius:10,marginLeft:100,padding:20,backgroundColor:'#7A4099',width:180,alignItems: 'center'}} onPress={this.navigate.bind(this ,'Second')} >
+                      <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
+                  </TouchableHighlight>
+
+                </View>
+        </Image>
+        );
+      }
   }
-
-
-}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#FFF952',
     paddingTop:50
+  },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
   },
   button: {
    borderWidth: 1,
+   borderRadius:10,
    marginBottom:30,
-   height:40,
-   width:300,
+   height:60,
+   width:150,
    justifyContent: 'center',
    alignItems: 'center'
   },
   searchBar: {
+    borderRadius:10,
      marginBottom:30,
-     marginLeft:40,
-     height:40,
-     width:250,
-     borderColor: '#E4E4E4'
+     marginLeft:20,
+     marginTop:15,
+     height:50,
+     width:330,
+     borderColor: '#E4E4E4',
+     backgroundColor:'#FFF'
 
 },
   buttonText:{
