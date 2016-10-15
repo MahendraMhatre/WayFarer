@@ -38,7 +38,6 @@ export default class First extends Component {
                   <TouchableHighlight  style = {{borderRadius:10,marginLeft:100,padding:20,backgroundColor:'#7A4099',width:180,alignItems: 'center'}} onPress={this.navigate.bind(this ,'Second')} >
                       <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
                   </TouchableHighlight>
-
                 </View>
         </Image>
         );

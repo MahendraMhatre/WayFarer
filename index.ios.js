@@ -24,6 +24,7 @@ export default class Wayfarer extends Component {
     }
 
   }
+  
   /*To configure from which direction the screen should float depending on condition default is from right */
   configureScene(route, routeStack) {
     if(route.type === 'Modal') {
