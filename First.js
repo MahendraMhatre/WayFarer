@@ -15,7 +15,7 @@ export default class First extends Component {
 
   navigate(routeName) {
       this.props.navigator.push({
-        name: 'Second'
+        name: routeName
       })
   }
 
