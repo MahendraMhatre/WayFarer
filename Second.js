@@ -58,7 +58,7 @@ class Second extends Component {
         return (
 
             <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
-               <View style = {{marginTop:50}}>
+               <View style = {{marginTop:100}}>
                    <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"
                     value={this.props.location}/>
                    <View style={{flexDirection: 'row'}}>
@@ -70,12 +70,15 @@ class Second extends Component {
                    </View>
 
 
-                   <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} enableEmptySections={true}/>
+                   <ListView dataSource={this.state.dataSource} renderRow={this._myRenderRow} enableEmptySections={true}/>
 
 
                </View>
              </Image>
         );
+    }
+    _myRenderRow() {
+
     }
 
 };
