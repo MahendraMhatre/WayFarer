@@ -22,6 +22,7 @@ class First extends Component {
             location: "",
             twitterHandle: "",
             productArray: [],
+            twitterScores: [],
             animating: false,
         };
     }
@@ -78,11 +79,12 @@ class First extends Component {
       this.getTheData(function(json){
         productArray = json.businesses;
         this.setState({productArray:productArray});
+        this.setState({twitterScores: json.wayfarer_twitter_scores});
         this.setState({animating: false});
         this.props.navigator.push({
             title: "",
             component: Second,
-            passProps: {location: this.state.location, twitterHandle: this.state.twitterHandle, productArray: productArray},
+            passProps: {location: this.state.location, twitterHandle: this.state.twitterHandle, productArray: productArray, twitterScores: json.wayfarer_twitter_scores},
         });
 
       }.bind(this));
