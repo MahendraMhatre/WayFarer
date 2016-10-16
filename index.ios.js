@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, Navigator, Text, View } from 'react-native';
 
-import First from '/Users/mahendramhatre/Desktop/Wayfarer/First.js';
-import Second from '/Users/mahendramhatre/Desktop/Wayfarer/Second.js';
+import First from './First.js';
+import Second from './Second.js';
 
 
 export default class Wayfarer extends Component {

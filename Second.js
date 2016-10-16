@@ -69,7 +69,7 @@ export default class Second extends Component {
   render() {
     this.componentDidMount();
     return (
-       <Image source={require('/Users/mahendramhatre/Desktop/Wayfarer/SearchPage.png')} style= {styles.backgroundImage}>
+       <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
           <View style = {{marginTop:50}}>
               <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
               <View style={{flexDirection: 'row'}}>
@@ -116,7 +116,9 @@ const styles = StyleSheet.create({
      height:40,
      width:330,
      borderColor: '#E4E4E4',
-     backgroundColor:'#FFF'
+     backgroundColor:'#FFF',
+     paddingLeft: 10,
+     paddingRight: 10,
 
 },
 searchBar1: {

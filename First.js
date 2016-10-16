@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-import Second from '/Users/mahendramhatre/Desktop/Wayfarer/Second.js';
+import Second from './Second.js';
 
 export default class First extends Component {
 
@@ -25,7 +25,7 @@ export default class First extends Component {
   render() {
       return  (
 
-        <Image source={require('/Users/mahendramhatre/Desktop/Wayfarer/Wayfarer.png')} style= {styles.backgroundImage}>
+        <Image source={require('./Wayfarer.png')} style= {styles.backgroundImage}>
             <View style ={styles.container}>
 
                   <Text  style = {{paddingLeft:20,paddingTop:200,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> So where are we going ?</Text>
@@ -77,7 +77,9 @@ const styles = StyleSheet.create({
      height:50,
      width:330,
      borderColor: '#E4E4E4',
-     backgroundColor:'#FFF'
+     backgroundColor:'#FFF',
+     paddingLeft:10,
+     paddingRight:10,
 
 },
   buttonText:{
