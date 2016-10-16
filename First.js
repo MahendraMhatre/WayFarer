@@ -18,8 +18,8 @@ class First extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: ""
+            location: "",
+            twitterHandle: ""
         };
     }
 
@@ -31,8 +31,8 @@ class First extends Component {
                       <Text  style = {{backgroundColor:'rgba(52,52,52,0)',paddingLeft:20,marginTop:150,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> So where are we going ?</Text>
 
                       <TextInput
-                          onChange={(event) => this.setState({username: event.nativeEvent.text})}
-                          value={this.state.username}
+                          onChange={(event) => this.setState({location: event.nativeEvent.text})}
+                          value={this.state.location}
                           style={styles.searchBar}
                           placeholder= "   eg: Houston, San Jose"/>
 
@@ -41,8 +41,8 @@ class First extends Component {
 
 
                       <TextInput
-                          onChange={(event) => this.setState({password: event.nativeEvent.text})}
-                          value={this.state.password}
+                          onChange={(event) => this.setState({twitterHandle: event.nativeEvent.text})}
+                          value={this.state.twitterHandle}
                           style={styles.searchBar}
                           placeholder= "   @Twitter Handle"/>
 
@@ -61,7 +61,7 @@ class First extends Component {
         this.props.navigator.push({
             title: "",
             component: Second,
-            passProps: {username: this.state.username, password: this.state.password},
+            passProps: {location: this.state.location, twitterHandle: this.state.twitterHandle},
         });
     }
 

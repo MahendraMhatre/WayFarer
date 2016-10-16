@@ -13,14 +13,14 @@ class Second extends Component {
       this.state = {
         dataSource: ds.cloneWithRows(productArray),
         isLoading:true,
-        username: this.props.username,
-        password: this.props.password
+        location: this.props.location,
+        twitterHandle: this.props.twitterHandle
 
       };
     }
 
     getTheData(callback) {
-       var url = "https://raw.githubusercontent.com/darkarmyIN/React-Native-DynamicListView/master/appledata.json";
+       var url = "https://wayfarer.incognitech.in/?twitter_handle="+this.props.twitterHandle+"&city="+this.props.location;
        fetch(url)
        .then(response => response.json())
        .then(json => callback(json))
@@ -59,11 +59,13 @@ class Second extends Component {
 
             <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
                <View style = {{marginTop:50}}>
-                   <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
+                   <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"
+                    value={this.props.location}/>
                    <View style={{flexDirection: 'row'}}>
-                     <TextInput style={styles.searchBar1} placeholder= "   @Twitter Handle"   />
-                     <TouchableHighlight  style ={{borderRadius:10,backgroundColor:'#7A4099',width:100,marginLeft:10,marginTop:5,paddingTop:10,height:40,alignItems:'center'}} >
-                      <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> {this.props.username}</Text>
+                     <TextInput style={styles.searchBar1} placeholder= "   @Twitter Handle"
+                      value={this.props.twitterHandle}  />
+                     <TouchableHighlight  style ={{borderRadius:10,backgroundColor:'#7A4099',width:100,marginLeft:10,marginTop:5,paddingTop:7.5,height:40,alignItems:'center'}} >
+                      <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Refine</Text>
                      </TouchableHighlight>
                    </View>
 
@@ -105,7 +107,9 @@ const styles = StyleSheet.create({
      height:40,
      width:330,
      borderColor: '#E4E4E4',
-     backgroundColor:'#FFF'
+     backgroundColor:'#FFF',
+     paddingLeft:10,
+     paddingRight:10,
 
 },
 searchBar1: {
@@ -116,7 +120,9 @@ searchBar1: {
    height:40,
    width:220,
    borderColor: '#E4E4E4',
-   backgroundColor:'#FFF'
+   backgroundColor:'#FFF',
+   paddingLeft:10,
+   paddingRight:10,
 
 },
   buttonText:{
