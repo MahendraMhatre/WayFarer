@@ -11,43 +11,61 @@ import {
   Image
 } from 'react-native';
 
+var Second = require("./Second");
 
-import Second from './Second.js';
+class First extends Component {
 
-export default class First extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        };
+    }
 
-  navigate(routeName) {
-      this.props.navigator.push({
-        name: routeName
-      })
-  }
+    render() {
+        return (
+            <Image source={require('./Wayfarer.png')} style= {styles.backgroundImage}>
+                <View style ={styles.container}>
 
-  render() {
-      return  (
+                      <Text  style = {{backgroundColor:'rgba(52,52,52,0)',paddingLeft:20,marginTop:150,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> So where are we going ?</Text>
 
-        <Image source={require('./Wayfarer.png')} style= {styles.backgroundImage}>
-            <View style ={styles.container}>
+                      <TextInput
+                          onChange={(event) => this.setState({username: event.nativeEvent.text})}
+                          value={this.state.username}
+                          style={styles.searchBar}
+                          placeholder= "   eg: Houston, San Jose"/>
 
-                  <Text  style = {{paddingLeft:20,paddingTop:200,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> So where are we going ?</Text>
-
-                  <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
-
-                  <Text  style = {{paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> And you are?</Text>
-                  <Text  style = {{paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Or who you d want to be?</Text>
+                      <Text  style = {{backgroundColor:'rgba(52,52,52,0)',paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> And you are?</Text>
+                      <Text  style = {{backgroundColor:'rgba(52,52,52,0)',paddingLeft:20,fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Or who you d want to be?</Text>
 
 
-                  <TextInput style={styles.searchBar} placeholder= "   @Twitter Handle"/>
+                      <TextInput
+                          onChange={(event) => this.setState({password: event.nativeEvent.text})}
+                          value={this.state.password}
+                          style={styles.searchBar}
+                          placeholder= "   @Twitter Handle"/>
 
-                  <TouchableHighlight  style = {{borderRadius:10,marginLeft:100,padding:20,backgroundColor:'#7A4099',width:180,alignItems: 'center'}} onPress={this.navigate.bind(this ,'Second')} >
-                      <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
-                  </TouchableHighlight>
-                </View>
+                      <TouchableHighlight  style = {{borderRadius:10,marginLeft:100,padding:20,backgroundColor:'#7A4099',width:180,alignItems: 'center'}} onPress={(this.onSubmitPressed.bind(this))}  >
+                          <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
+                      </TouchableHighlight>
+                    </View>
 
-        </Image>
+            </Image>
+
 
         );
-      }
-  }
+    }
+
+    onSubmitPressed() {
+        this.props.navigator.push({
+            title: "",
+            component: Second,
+            passProps: {username: this.state.username, password: this.state.password},
+        });
+    }
+
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -96,4 +114,6 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5
   }
-})
+});
+
+module.exports = First;

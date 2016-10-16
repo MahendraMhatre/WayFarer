@@ -1,22 +1,10 @@
-import React, { Component,PropTypes} from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Navigator,
-  TouchableHighlight,
-  Image,
-  TextInput,
-  ListView
-} from 'react-native';
+"use strict";
+
+import React, { Component } from 'react';
+import{ AppRegistry, ScrollView, Image, Text, View,StyleSheet, NavigatorIOS, TextInput, TouchableHighlight, ListView } from 'react-native'
 
 var productArray = [];
-
-export default class Second extends Component {
- static propTypes = {
-    getBack: PropTypes.func,
-  }
+class Second extends Component {
 
   constructor(props) {
       super(props);
@@ -24,8 +12,9 @@ export default class Second extends Component {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.guid !== r2.guid});
       this.state = {
         dataSource: ds.cloneWithRows(productArray),
-        isLoading:true
-
+        isLoading:true,
+        username: this.props.username,
+        password: this.props.password
 
       };
     }
@@ -52,42 +41,42 @@ export default class Second extends Component {
 
 
    renderRow(rowData, sectionID, rowID) {
-  	return (
+    return (
 
-     	<TouchableHighlight underlayColor='#dddddd' style={{height:44}}>
+      <TouchableHighlight  style={{paddingVertical:5,borderBottomWidth:0.5,borderBottomColor:'rgba(0,0,0,0.1)',height:44,alignItems:'center',flexDirection:'row',paddingHorizontal:10}}>
          <View>
          <Text style={{fontSize: 20, color: '#000000'}} numberOfLines={1}>{rowData.display_string}</Text>
          <View style={{height: 1, backgroundColor: '#dddddd'}}/>
 
          </View>
-     	</TouchableHighlight>
+      </TouchableHighlight>
    );
  }
 
 
+    render() {
+        return (
 
-  render() {
-    this.componentDidMount();
-    return (
-       <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
-          <View style = {{marginTop:50}}>
-              <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
-              <View style={{flexDirection: 'row'}}>
-                <TextInput style={styles.searchBar1} placeholder= "   @Twitter Handle"   />
-                <TouchableHighlight  style ={{borderRadius:10,backgroundColor:'#7A4099',width:100,marginLeft:10,marginTop:5,paddingTop:10,height:40,alignItems:'center'}} >
-                 <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Refine</Text>
-                </TouchableHighlight>
-              </View>
-
-
-              <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} enableEmptySections={true}/>
+            <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
+               <View style = {{marginTop:50}}>
+                   <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"/>
+                   <View style={{flexDirection: 'row'}}>
+                     <TextInput style={styles.searchBar1} placeholder= "   @Twitter Handle"   />
+                     <TouchableHighlight  style ={{borderRadius:10,backgroundColor:'#7A4099',width:100,marginLeft:10,marginTop:5,paddingTop:10,height:40,alignItems:'center'}} >
+                      <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> {this.props.username}</Text>
+                     </TouchableHighlight>
+                   </View>
 
 
-          </View>
-        </Image>
+                   <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} enableEmptySections={true}/>
+
+
+               </View>
+             </Image>
         );
-      }
-  }
+    }
+
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -116,9 +105,7 @@ const styles = StyleSheet.create({
      height:40,
      width:330,
      borderColor: '#E4E4E4',
-     backgroundColor:'#FFF',
-     paddingLeft: 10,
-     paddingRight: 10,
+     backgroundColor:'#FFF'
 
 },
 searchBar1: {
@@ -146,4 +133,7 @@ searchBar1: {
     color: '#333333',
     marginBottom: 5
   }
-})
+});
+
+
+module.exports = Second;
