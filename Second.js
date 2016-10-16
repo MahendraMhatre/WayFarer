@@ -1,9 +1,21 @@
 "use strict";
 
 import React, { Component } from 'react';
-import{ AppRegistry, ScrollView, Image, Text, View,StyleSheet, NavigatorIOS, TextInput, TouchableHighlight, ListView } from 'react-native'
+import{
+  AppRegistry,
+  ScrollView,
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  NavigatorIOS,
+  TextInput,
+  TouchableHighlight,
+  ListView,
+  Switch,
+} from 'react-native'
 
-var productArray = [];
+// var productArray = [];
 class Second extends Component {
 
   constructor(props) {
@@ -11,33 +23,13 @@ class Second extends Component {
 
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.guid !== r2.guid});
       this.state = {
-        dataSource: ds.cloneWithRows(productArray),
-        isLoading:true,
+        dataSource: ds.cloneWithRows(this.props.productArray),
         location: this.props.location,
-        twitterHandle: this.props.twitterHandle
-
+        twitterHandle: this.props.twitterHandle,
+        productArray: this.props.productArray,
+        isHackRiceModeOn: false,
       };
     }
-
-    getTheData(callback) {
-       var url = "https://wayfarer.incognitech.in/?twitter_handle="+this.props.twitterHandle+"&city="+this.props.location;
-       fetch(url)
-       .then(response => response.json())
-       .then(json => callback(json))
-       .catch(error => console.log(error));
-     }
-
-    componentDidMount() {
-    this.getTheData(function(json){
-    productArray = json;
-    this.setState = ({
-      datasource:this.state.dataSource.cloneWithRows(productArray),
-      isLoading:false
-    })
-  }.bind(this));
-
-  }
-
 
 
    renderRow(rowData, sectionID, rowID) {
@@ -45,7 +37,7 @@ class Second extends Component {
 
       <TouchableHighlight  style={{paddingVertical:5,borderBottomWidth:0.5,borderBottomColor:'rgba(0,0,0,0.1)',height:44,alignItems:'center',flexDirection:'row',paddingHorizontal:10}}>
          <View>
-         <Text style={{fontSize: 20, color: '#000000'}} numberOfLines={1}>{rowData.display_string}</Text>
+         <Text style={{fontSize: 20, color: '#000000'}} numberOfLines={1}>{rowData.name}</Text>
          <View style={{height: 1, backgroundColor: '#dddddd'}}/>
 
          </View>
@@ -58,7 +50,7 @@ class Second extends Component {
         return (
 
             <Image source={require('./SearchPage.png')} style= {styles.backgroundImage}>
-               <View style = {{marginTop:100}}>
+               <View style = {{marginTop:100,flex:1}}>
                    <TextInput style={styles.searchBar} placeholder= "   eg: Houston, San Jose"
                     value={this.props.location}/>
                    <View style={{flexDirection: 'row'}}>
@@ -68,19 +60,19 @@ class Second extends Component {
                       <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Refine</Text>
                      </TouchableHighlight>
                    </View>
+                   <View style={{flexDirection: 'row'}}>
+                     <Switch
+                        onValueChange={(value) => this.setState({isHackRiceModeOn: value})}
+                        style={{marginBottom: 10, marginLeft: 20}}
+                        value={this.state.isHackRiceModeOn} />
+                      <Text style={{backgroundColor: 'rgba(52,52,52,0)', marginLeft: 10, marginTop: 5, alignItems:'flex-start'}}>Enable #HackRice Mode</Text>
+                    </View>
 
-
-                   <ListView dataSource={this.state.dataSource} renderRow={this._myRenderRow} enableEmptySections={true}/>
-
-
+                   <ListView style={styles.businessList} dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} enableEmptySections={true}/>
                </View>
              </Image>
         );
     }
-    _myRenderRow() {
-
-    }
-
 };
 
 const styles = StyleSheet.create({
@@ -127,6 +119,11 @@ searchBar1: {
    paddingLeft:10,
    paddingRight:10,
 
+},
+businessList: {
+  marginLeft: 20,
+  marginRight: 20,
+  // flex: 1,
 },
   buttonText:{
     textAlign: 'center',

@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableHighlight,
   Navigator,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
 var Second = require("./Second");
@@ -19,7 +20,9 @@ class First extends Component {
         super(props);
         this.state = {
             location: "",
-            twitterHandle: ""
+            twitterHandle: "",
+            productArray: [],
+            animating: false,
         };
     }
 
@@ -49,6 +52,10 @@ class First extends Component {
                       <TouchableHighlight  style = {{borderRadius:10,marginLeft:100,padding:20,backgroundColor:'#7A4099',width:180,alignItems: 'center'}} onPress={(this.onSubmitPressed.bind(this))}  >
                           <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
                       </TouchableHighlight>
+                      <ActivityIndicator
+                        animating={this.state.animating}
+                        style={[styles.centering, {height: 80}]}
+                        size="large" />
                     </View>
 
             </Image>
@@ -57,12 +64,28 @@ class First extends Component {
         );
     }
 
+    getTheData(callback) {
+       var url = "https://wayfarer.incognitech.in/?twitter_handle="+this.state.twitterHandle+"&city="+this.state.location;
+       fetch(url)
+       .then(response => response.json())
+       .then(json => callback(json))
+       .catch(error => console.log(error));
+     }
+
     onSubmitPressed() {
+      this.setState({animating: true});
+      var self = this;
+      this.getTheData(function(json){
+        productArray = json.businesses;
+        this.setState({productArray:productArray});
+        this.setState({animating: false});
         this.props.navigator.push({
             title: "",
             component: Second,
-            passProps: {location: this.state.location, twitterHandle: this.state.twitterHandle},
+            passProps: {location: this.state.location, twitterHandle: this.state.twitterHandle, productArray: productArray},
         });
+
+      }.bind(this));
     }
 
 };
