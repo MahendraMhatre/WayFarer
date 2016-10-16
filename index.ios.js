@@ -16,15 +16,16 @@ export default class Wayfarer extends Component {
     if(route.name == 'root') {
       return (<First navigator={navigator} />);
     }
+
     if(route.name == 'Second') {
       return (<Second navigator={navigator}   getBack={() => {
          navigator.pop();
-
-            }} />);
+       }} />);
     }
 
+
   }
-  
+
   /*To configure from which direction the screen should float depending on condition default is from right */
   configureScene(route, routeStack) {
     if(route.type === 'Modal') {
@@ -46,5 +47,6 @@ export default class Wayfarer extends Component {
     );
   }
 }
+module.exports = Wayfarer;
 
 AppRegistry.registerComponent('Wayfarer', () => Wayfarer);

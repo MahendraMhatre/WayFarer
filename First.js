@@ -11,6 +11,9 @@ import {
   Image
 } from 'react-native';
 
+
+import Second from '/Users/mahendramhatre/Desktop/Wayfarer/Second.js';
+
 export default class First extends Component {
 
   navigate(routeName) {
@@ -39,7 +42,9 @@ export default class First extends Component {
                       <Text style = {{color:"#FFF",fontSize:20,fontFamily:'ArialHebrew-Bold'}}> Lets go !</Text>
                   </TouchableHighlight>
                 </View>
+
         </Image>
+
         );
       }
   }
